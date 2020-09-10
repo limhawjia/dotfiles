@@ -1,0 +1,324 @@
+################
+## Colors
+################
+[colors]
+background = #EE2E3440
+foreground = #D8DEE9
+foreground-pale = #4C566A
+red = #BF616A
+green = #A3BE8C
+yellow = #EBCB8B
+blue = #81A1C1
+purple = #B48EAD
+orange = #D08770
+cyan = #88C0D0
+
+################
+## Bars
+################
+[bar/topbar]
+monitor = ${env:MONITOR:}
+enable-ipc = true
+
+height = 40
+width = 98%
+offset-x = 1%
+background = ${colors.background}
+foreground = ${colors.foreground}
+padding = 5
+radius-bottom = 20
+
+font-0 = DejavuSans:size=9;3
+font-1 = DejaVuSansMono Nerd Font:size=9;3
+font-2 = Source Han Sans CN:size=9;3
+
+override-redirect = false
+wm-restack=bspwm
+
+modules-left = logo bspwm xwindow 
+modules-center = time
+modules-right = volume backlight memory cpu temperature battery powermenu
+
+[bar/bottombar]
+monitor = ${env:MONITOR:}
+enable-ipc = true
+
+height = 40
+width = 98%
+offset-x = 1%
+background = ${colors.background}
+foreground = ${colors.foreground}
+padding = 6
+radius-top = 20
+bottom = true
+
+font-0 = DejavuSans:size=9;3
+font-1 = DejaVuSansMono Nerd Font:size=9;3
+font-2 = Source Han Sans CN:size=9;3
+
+override-redirect = false
+wm-restack=bspwm
+
+modules-left = network eth publicip upspeed downspeed 
+modules-center = polytimercontrol timer
+modules-right = previous playpause next music
+
+################
+## Modules
+################
+[module/logo]
+type = custom/text
+format-margin = 2
+content-foreground = ${colors.cyan}
+content-padding = 3
+content = 
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:20%
+format-margin = 3
+
+[module/bspwm]
+type = internal/bspwm
+format = <label-state>
+format-margin = 2
+
+index-sort = true
+enable-click = true
+reverse-scroll = false
+
+label-focused = ﱣ
+label-focused-foreground = ${colors.blue}
+label-focused-padding = 1
+
+label-occupied = 
+label-occupied-foreground = ${colors.blue}
+label-occupied-padding = 1
+
+label-empty = 
+label-empty-padding = 1
+
+label-urgent = ﱣ
+label-urgent-foreground = ${colors.red}
+label-urgent-padding = 1
+
+[module/powermenu]
+type = custom/menu
+expand-right = false
+format-margin = 2
+format-foreground = ${colors.foreground-pale}
+
+label-open = 
+label-open-foreground = ${colors.cyan}
+label-open-padding=2
+
+label-close = 
+label-close-foreground = ${colors.red}
+label-close-padding=2
+
+menu-0-0 = 
+menu-0-0-exec = bspc quit
+menu-0-0-padding=2
+
+menu-0-1 = 
+menu-0-1-exec = reboot
+menu-0-1-padding=2
+
+menu-0-2 = 
+menu-0-2-exec = poweroff
+menu-0-2-padding=2
+
+[module/battery]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/batterypercent.sh
+poll-interval = 5
+
+format = <label>
+label = %output%
+format-padding = 1
+
+[module/backlight]
+type = custom/ipc
+hook-0 = $HOME/.config/polybar/scripts/backlight.sh
+initial = 1
+
+format = <output>
+format-foreground = ${colors.orange}
+format-padding = 2
+
+scroll-up = $HOME/.config/polybar/scripts/backlight.sh increase
+scroll-down = $HOME/.config/polybar/scripts/backlight.sh decrease
+
+[module/volume]
+type = internal/pulseaudio
+enable-scroll = true
+
+format-volume-padding = 3
+format-volume = <ramp-volume>  <label-volume>
+
+label-volume-foreground = ${colors.purple}
+
+label-muted = ﱝ   muted
+label-muted-foreground = ${colors.red}
+label-muted-padding = 2
+
+ramp-volume-foreground = ${colors.purple}
+ramp-volume-0 = 奄
+ramp-volume-1 = 奔
+ramp-volume-2 = 墳
+
+[module/time]
+type=internal/date
+interval = 1                    
+format-padding = 3              
+time = "%H:%M:%S"               
+date = "%A %d %B"               
+label = %date%, %time%          
+label-padding = 2
+
+[module/network]
+type = internal/network
+interface = wlan0
+interval = 5
+format-connected-margin = 4
+format-connected-foreground = ${colors.green}
+
+format-connected = <ramp-signal>    <label-connected>  
+label-connected = %essid%
+
+ramp-signal-0 = 睊
+ramp-signal-1 = 睊
+ramp-signal-2 = 直
+ramp-signal-3 = 直
+ramp-signal-4 = 
+ramp-signal-5 = 
+
+format-disconnected = <label-disconnected>
+format-disconnected-margin = 4
+format-disconnected-foreground = ${colors.red}
+label-disconnected = %ifname%
+
+[module/upspeed]
+
+type = internal/network
+interface = wlan0
+interval = 1
+format-connected-margin = 0
+format-connected-foreground = ${colors.purple}
+
+format-connected = <label-connected>
+label-connected = %upspeed:9%  祝
+
+[module/downspeed]
+
+type = internal/network
+interface = wlan0
+interval = 1
+format-connected-margin = 1
+format-connected-foreground = ${colors.orange}
+
+format-connected = <label-connected>
+label-connected = %downspeed:9%  
+
+[module/eth]
+type = internal/network
+interface = enp8s0
+interval = 3.0
+
+format-connected = <label-connected>
+label-connected = %ifname% 
+format-connected-margin = 4
+
+format-disconnected = <label-disconnected>
+format-disconnected-margin = 4
+format-disconnected-foreground = ${colors.foreground-pale}
+label-disconnected = %ifname% 
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "  "
+format-padding = 2
+format-foreground = ${colors.foreground}
+label = %percentage%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-padding = 2
+format-prefix = " "
+format-foreground = ${colors.foreground}
+label = %percentage_used%%
+ 
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+format-padding = 1
+warn-temperature = 60
+
+format-margin = 1
+format =   <label>
+format-warn =  <label-warn>
+format-foreground = ${colors.green}
+format-warn-foreground = ${colors.red}
+
+[module/previous]
+type = custom/script
+format-margin = 2
+format-foreground = ${colors.foreground}
+exec = echo "玲"
+click-left = playerctl previous
+
+[module/next]
+type = custom/script
+format-margin = 2
+format-foreground = ${colors.foreground}
+exec = echo "怜"
+click-left = playerctl next
+
+[module/playpause]
+type = custom/script
+format-margin = 2
+format-foreground = ${colors.foreground}
+exec = echo "懶"
+click-left = playerctl play-pause
+
+[module/music]
+type = custom/script
+format-margin = 4
+format = ﱘ   <label>
+format-foreground = ${colors.cyan}
+exec = $HOME/.config/polybar/scripts/getmusicstatus.sh
+interval = 3
+
+[module/publicip]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/infopublicip.sh
+interval = 10 
+format-padding = 4
+
+[module/polytimercontrol]
+type = custom/ipc
+hook-0 = $HOME/.config/polybar/scripts/polytimercontrol.sh init;
+hook-1 = $HOME/.config/polybar/scripts/polytimercontrol.sh
+initial = 1
+
+format = <output>
+format-foreground = ${colors.blue}
+format-padding = 1
+
+scroll-up = $HOME/.config/polybar/scripts/polytimercontrol.sh increase;
+scroll-down = $HOME/.config/polybar/scripts/polytimercontrol.sh decrease;
+click-left = $HOME/.config/polybar/scripts/polytimercontrol.sh start;
+click-right = $HOME/.config/polybar/scripts/polytimercontrol.sh kill;
+
+[module/timer]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/checkpolytimer.sh
+interval = 1
+
+format = <label>
+format-padding = 2
+label = %output%
+
+; vim:ft=dosini
