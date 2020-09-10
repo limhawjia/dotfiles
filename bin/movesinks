@@ -1,0 +1,9 @@
+#!/bin/zsh 
+echo "Setting default sink to: $1";
+pacmd set-default-sink $1
+pacmd list-sink-inputs | grep index | while read line
+do
+    input=$(echo $line | cut -f2 -d ' ')
+    echo "Moving input $input to sink $1";
+    pacmd move-sink-input $input $1
+done

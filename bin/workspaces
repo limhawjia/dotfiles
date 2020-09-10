@@ -1,0 +1,63 @@
+#!/bin/bash
+
+if [ -z $AUTORANDR_CURRENT_PROFILE ]; then
+    echo "Detecting current profile..."
+    profile=$(autorandr --current)
+else
+    profile=$AUTORANDR_CURRENT_PROFILE
+fi
+
+populate() {
+    monitor=$1
+    all_desktops=$(bspc query -D --names)
+
+    # Put all desktops into array
+    arr=(${all_desktops[@]})
+
+    for i in $(seq $2 $3); do
+        if [[ " ${arr[@]} " =~ " ${i} " ]]; then
+            # Move the existing desktop
+            echo "Moving desktop $i to $monitor"
+            bspc desktop $i -m $monitor
+        else
+            # Create new desktop
+            echo "Creating new desktop $i"
+            bspc monitor $monitor -a $i
+        fi
+    done
+}
+
+clean() {
+    all_desktops=$(bspc query -D --names)
+
+    # Put all desktops into array
+    arr=(${all_desktops[@]})
+
+    for i in ${all_desktops[@]}; do
+        if ! [[ "$i" =~ ^[0-7]$ ]]; then
+            echo "Deleting desktop $i"
+            bspc desktop $i -r
+        fi
+    done
+}
+
+if [[ $profile == "Docked" ]]; then
+    echo "Profile (Docked) detected"
+    populate "DP-1" 0 3
+    populate "eDP-1" 4 7
+elif [[ $profile == "Mobile" ]]; then
+    echo "Profile (Mobile) detected"
+    populate "eDP-1" 0 7
+elif [[ $profile == "External" ]]; then
+    echo "Profile (External) detected"
+    populate "DP-1" 0 7
+else
+    echo "Profile (Unknown) detected"
+    populate "eDP-1" 0 7
+fi
+
+clean
+
+feh --bg-fill --randomize $HOME/Pictures/Wallpapers/* >/dev/null 2>&1
+~/.config/polybar/launch.sh >/dev/null 2>&1
+
