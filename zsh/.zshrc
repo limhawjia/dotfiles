@@ -7,7 +7,7 @@ setopt extendedglob
 unsetopt beep extendedglob notify
 
 # Autocompletion
-zstyle :compinstall filename '/home/hawjia/.config/zsh/.zshrc'
+zstyle :compinstall filename "$HOME/.config/zsh/.zshrc"
 zstyle ':completion:*' menu yes select
 zmodload zsh/complist
 bindkey -M menuselect '^h' vi-backward-char
@@ -66,8 +66,6 @@ if [[ -n $DISPLAY ]]; then
 	  source "$HOME/.cache/p10k-instant-prompt-${(%):-%n}.zsh"
 	fi
 	source ~/.config/zsh/.p10k.zsh
-else
-    PROMPT='%(?.%F{green}√.%F{red}?%?)%f %B%F{240}%1~%f%b %# '
 fi
 
 # Go
