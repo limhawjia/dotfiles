@@ -6,21 +6,21 @@ filetype on
 source ~/.config/nvim/plugins.vim
 
 " Colors and themes
-colorscheme nord
 syntax on
+colorscheme nord
 set background=dark
 let &t_8f = "\e[38;2;%lu;%lu;%lum"
 let &t_8b = "\e[48;2;%lu;%lu;%lum"
 
- " Ui + layout
- set number
- set relativenumber
- set colorcolumn=80
- set showmatch
- set ruler
- set laststatus=2
- set nowrap
- set cursorline
+" Ui + layout
+set number
+set relativenumber
+set colorcolumn=80
+set showmatch
+set ruler
+set laststatus=2
+set nowrap
+set cursorline
 
 " Spell check
 set spell spelllang=en_us
@@ -65,8 +65,10 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+
 " Filetype options
 source ~/.config/nvim/filetypes.vim
 
 " Keybindings
 source ~/.config/nvim/keybindings.vim
+

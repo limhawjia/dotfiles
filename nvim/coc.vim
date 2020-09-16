@@ -14,6 +14,11 @@ let g:airline#extensions#coc#enabled = 1
 " <c-k> to toggle up suggestions
 " <c-h> to trigger completion (c for help)
 " <ENTER> to confirm completion
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <silent><expr> <C-j>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -26,8 +31,10 @@ endfunction
 inoremap <silent><expr> <c-h> coc#refresh()
 if exists('*complete_info')
   inoremap <expr> <ENTER> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <C-@> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
   inoremap <expr> <ENTER> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <C-@> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
 " navigation keybindings
@@ -41,8 +48,6 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <leader>rn <Plug>(coc-rename)
-nnoremap <leader>rr :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <silent> gh :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -51,6 +56,8 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+nmap <leader>rn <Plug>(coc-rename)
+nnoremap <leader>rr :CocSearch <C-R>=expand("<cword>")<CR><CR>
 
 " formatting selected code.
 " xmap <leader>f  <Plug>(coc-format-selected)

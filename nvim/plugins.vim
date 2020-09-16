@@ -1,7 +1,7 @@
 call plug#begin()
 " -- themes --
-Plug 'gruvbox-community/gruvbox'
 Plug 'arcticicestudio/nord-vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " -- syntax --
@@ -19,9 +19,9 @@ Plug 'preservim/nerdtree'
 " -- workflow --
 Plug 'junegunn/fzf', { 'dir': '~/.local/lib/fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'conornewton/vim-latex-preview'
 " -- editing --
 Plug 'adelarsq/vim-matchit'
-Plug 'mg979/vim-visual-multi'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
@@ -31,13 +31,14 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 " -- languages --
-Plug 'vim-python/python-syntax'
-Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+Plug 'fatih/vim-go'
 " -- autocompletion --
 Plug 'lervag/vimtex'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/diagnostic-nvim'
+Plug 'nvim-lua/completion-nvim'
+" -- others --
+Plug 'h-youhei/vim-ibus'
 call plug#end()
 
 " gruvbox-community/gruvbox
@@ -75,6 +76,7 @@ nmap <Leader>gs :G<CR> "<Leader>gs to open up git status page>
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeMinimalMenu = 1 
 let g:NERDTreeShowHidden = 1
+let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeMapOpenInTab='<C-t>'
 let g:NERDTreeMapOpenSplit='<C-s>'
 let g:NERDTreeMapOpenVSplit='<C-v>'
@@ -90,23 +92,7 @@ let g:fzf_action = {
             \ 'ctrl-s': 'split',
             \ 'ctrl-v': 'vsplit'
             \}
-nnoremap <Leader>ps :Rg<CR>
-
-" mg979/vim-visual-multi
-let g:VM_maps = {}
-let g:VM_maps['Find Under']                  = ''
-let g:VM_maps['Find Subword Under']          = ''
-let g:VM_maps["Select All"]                  = ''
-let g:VM_maps["Start Regex Search"]          = ''
-let g:VM_maps["Add Cursor Down"]             = '<C-Down>'
-let g:VM_maps["Add Cursor Up"]               = '<C-Up>'
-let g:VM_maps["Add Cursor At Pos"]           = ''
-
-let g:VM_maps["Visual Regex"]                = ''
-let g:VM_maps["Visual All"]                  = '' 
-let g:VM_maps["Visual Add"]                  = ''
-let g:VM_maps["Visual Find"]                 = ''
-let g:VM_maps["Visual Cursors"]              = ''
+nnoremap <C-f> :Rg<CR>
 
 " alvan/vim-closetag
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.jsx,*.tsx,*.tx,*.js'
@@ -114,6 +100,17 @@ let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.jsx,*.tsx,*.tx,*.js'
 " lervag/vimtex
 let g:tex_flavor = 'latex'
 
-" neoclide/coc.nvim
-source ~/.config/nvim/coc.vim
+" vim-ibux
+let g:ibus#layout = 'xkb:us::eng'
+let g:ibus#engine = 'libpinyin'
+
+" nvim-lsp + completion-nvim + diagnostic-nvim
+set completeopt=menuone,noinsert,noselect
+set shortmess+=c
+let g:completion_confirm_key = ""
+let g:diagnostic_enable_virtual_text = 1
+let g:diagnostic_virtual_text_prefix = ' '
+let g:diagnostic_trimmed_virtual_text = '20'
+let g:diagnostic_auto_popup_while_jump = 1
+let g:diagnostic_enable_underline = 1
 
