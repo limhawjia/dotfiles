@@ -10,7 +10,6 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'Yggdroot/indentLine'
-Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 " ui layout
 Plug 'vim-airline/vim-airline'
@@ -20,6 +19,7 @@ Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'dir': '~/.local/lib/fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'conornewton/vim-latex-preview'
+Plug 'SirVer/ultisnips'
 " -- editing --
 Plug 'adelarsq/vim-matchit'
 Plug 'tpope/vim-surround'
@@ -33,29 +33,27 @@ Plug 'tpope/vim-fugitive'
 " -- languages --
 Plug 'fatih/vim-go'
 " -- autocompletion --
-Plug 'lervag/vimtex'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/diagnostic-nvim'
 Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 " -- others --
 Plug 'h-youhei/vim-ibus'
 call plug#end()
-
-" gruvbox-community/gruvbox
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_invert_selection='0'
 
 " junegunn/rainbow_parentheses.vim
 au VimEnter * RainbowParentheses "always on
 
 " Yggdroot/indentLine
-let g:indentLine_setConceal = 2
 " default ''.
 " n for Normal mode
 " v for Visual mode
 " i for Insert mode
 " c for Command line editing, for 'incsearch'
 let g:indentLine_concealcursor = ""
+let g:indentLine_setConceal = 2
+let g:indentLine_fileType = ['python']
 
 " plasticboy/vim-markdown "
 let g:vim_markdown_folding_disabled = 1
@@ -104,6 +102,11 @@ let g:tex_flavor = 'latex'
 let g:ibus#layout = 'xkb:us::eng'
 let g:ibus#engine = 'libpinyin'
 
+"SirVer/ultisnips
+let g:UltiSnipsExpandTrigger="<c-w>"
+let g:UltiSnipsJumpForwardTrigger="<c-w>"
+let g:UltiSnipsJumpBackwardTrigger="<c-q>"
+
 " nvim-lsp + completion-nvim + diagnostic-nvim
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
@@ -113,4 +116,5 @@ let g:diagnostic_virtual_text_prefix = ' '
 let g:diagnostic_trimmed_virtual_text = '20'
 let g:diagnostic_auto_popup_while_jump = 1
 let g:diagnostic_enable_underline = 1
+let g:completion_enable_snippet = 'UltiSnips'
 

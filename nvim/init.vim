@@ -7,10 +7,11 @@ source ~/.config/nvim/plugins.vim
 
 " Colors and themes
 syntax on
-colorscheme nord
 set background=dark
+set termguicolors
 let &t_8f = "\e[38;2;%lu;%lu;%lum"
 let &t_8b = "\e[48;2;%lu;%lu;%lum"
+colorscheme dracula
 
 " Ui + layout
 set number
