@@ -11,6 +11,7 @@ Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'Yggdroot/indentLine'
 Plug 'plasticboy/vim-markdown'
+Plug 'bfrg/vim-cpp-modern'
 " ui layout
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -20,6 +21,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.local/lib/fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'conornewton/vim-latex-preview'
 Plug 'SirVer/ultisnips'
+Plug 'ap/vim-css-color'
 " -- editing --
 Plug 'adelarsq/vim-matchit'
 Plug 'tpope/vim-surround'

@@ -13,6 +13,7 @@ nvim_lsp.pyls.setup{on_attach=on_attach_vim}
 nvim_lsp.tsserver.setup{on_attach=on_attach_vim}
 nvim_lsp.bashls.setup{on_attach=on_attach_vim}
 nvim_lsp.texlab.setup{on_attach=on_attach_vim}
+nvim_lsp.cssls.setup{on_attach=on_attach_vim}
 EOF
 
 " golang
@@ -20,13 +21,12 @@ au Filetype go set equalprg=gofmt
 
 " latex
 au Filetype tex set conceallevel=2
-au Filetype tex set textwidth=89
-au Filetype tex set colorcolumn=90
 
 " markdown
 au Filetype markdown set conceallevel=2
-au Filetype markdown set textwidth=89
-au Filetype markdown set colorcolumn=90
-au Filetype markdown set colorcolumn=90
 au Filetype markdown set shiftwidth=2
 au Filetype markdown set softtabstop=2 tabstop=2
+
+" html, js, ts, css
+au Filetype html,css,javascript,typescript set shiftwidth=2
+au Filetype html,css,javascript,typescript set softtabstop=2 tabstop=2
