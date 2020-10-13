@@ -28,9 +28,7 @@ au Filetype markdown setlocal shiftwidth=2
 au Filetype markdown setlocal softtabstop=2 tabstop=2
 
 " html, js, ts, css
+au bufnewfile,bufread *.tsx set filetype=typescript
+au bufnewfile,bufread *.jsx set filetype=javascript
 au Filetype html,css,javascript,typescript setlocal shiftwidth=2
 au Filetype html,css,javascript,typescript setlocal softtabstop=2 tabstop=2
-
-" jsx, tsx
-au Filetype *.tsx,*.jsx setlocal shiftwidth=2
-au Filetype *.tsx,*.jsx setlocal softtabstop=2 tabstop=2
