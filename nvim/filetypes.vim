@@ -17,16 +17,20 @@ nvim_lsp.cssls.setup{on_attach=on_attach_vim}
 EOF
 
 " golang
-au Filetype go set equalprg=gofmt
+au Filetype go setlocal equalprg=gofmt
 
 " latex
-au Filetype tex set conceallevel=2
+au Filetype tex setlocal conceallevel=2
 
 " markdown
-au Filetype markdown set conceallevel=2
-au Filetype markdown set shiftwidth=2
-au Filetype markdown set softtabstop=2 tabstop=2
+au Filetype markdown setlocal conceallevel=2
+au Filetype markdown setlocal shiftwidth=2
+au Filetype markdown setlocal softtabstop=2 tabstop=2
 
 " html, js, ts, css
-au Filetype html,css,javascript,typescript set shiftwidth=2
-au Filetype html,css,javascript,typescript set softtabstop=2 tabstop=2
+au Filetype html,css,javascript,typescript setlocal shiftwidth=2
+au Filetype html,css,javascript,typescript setlocal softtabstop=2 tabstop=2
+
+" jsx, tsx
+au Filetype *.tsx,*.jsx setlocal shiftwidth=2
+au Filetype *.tsx,*.jsx setlocal softtabstop=2 tabstop=2
