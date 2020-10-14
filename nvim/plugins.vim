@@ -12,6 +12,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'Yggdroot/indentLine'
 Plug 'plasticboy/vim-markdown'
 Plug 'bfrg/vim-cpp-modern'
+Plug 'styled-components/vim-styled-components'
 " ui layout
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -115,7 +116,6 @@ set shortmess+=c
 let g:completion_confirm_key = ""
 let g:diagnostic_enable_virtual_text = 1
 let g:diagnostic_virtual_text_prefix = ' '
-let g:diagnostic_trimmed_virtual_text = '20'
 let g:diagnostic_auto_popup_while_jump = 1
 let g:diagnostic_enable_underline = 1
 let g:completion_enable_snippet = 'UltiSnips'
