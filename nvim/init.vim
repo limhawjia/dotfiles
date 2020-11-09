@@ -66,10 +66,23 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-
 " Filetype options
 source ~/.config/nvim/filetypes.vim
+
+" coc
+source ~/.config/nvim/coc.vim
 
 " Keybindings
 source ~/.config/nvim/keybindings.vim
 
+" Terminal
+nmap <silent> <leader>tt :sp term://zsh<CR>
+tnoremap <Esc> <C-\><C-n>
+tnoremap <C-h> <C-\><C-N><C-w>h
+tnoremap <C-j> <C-\><C-N><C-w>j
+tnoremap <C-k> <C-\><C-N><C-w>k
+tnoremap <C-l> <C-\><C-N><C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l

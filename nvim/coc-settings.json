@@ -1,0 +1,16 @@
+{
+  "suggest.enablePreselect": true,
+  "suggest.maxPreviewWidth": 200,
+  "suggest.enablePreview": true,
+  "suggest.labelMaxLength": 400,
+  "suggest.disableKind": true,
+  "suggest.triggerCompletionWait": 200,
+  "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.errorSign": "✘",
+  "diagnostic.infoSign": "",
+  "codeLens.enable": true,
+  "coc.preferences.formatOnType": true
+}
