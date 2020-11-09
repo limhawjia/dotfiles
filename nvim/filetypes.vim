@@ -23,7 +23,5 @@ au Filetype html,css,javascript,typescript setlocal shiftwidth=2 softtabstop=2 t
 " json
 au Filetype json setlocal shiftwidth=2 softtabstop=2 tabstop=2
 
-" sql
-au Filetype sql setlocal conceallevel=2
-au Filetype sql setlocal shiftwidth=2 softtabstop=2 tabstop=2
-
+" yml
+au Filetype yml setlocal shiftwidth=2 softtabstop=2 tabstop=2
