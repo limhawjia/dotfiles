@@ -33,14 +33,15 @@ export PATH="$PATH:$HOME/Code/go/bin"
 alias ls='LC_COLLATE=C ls --color=auto'
 alias la='LC_COLLATE=C ls -a --color=auto'
 alias ll='LC_COLLATE=C ls -la --color=auto'
-alias zshconf='nvim $HOME/.config/zsh/.zshrc'
+alias zshconf='vim $HOME/.config/zsh/.zshrc'
 alias sxhkdre='pkill -USR1 -x sxhkd'
+alias vim='nvim'
 
 # FZF
 export FZF_BASE=$HOME/.local/lib/fzf
-export FZF_DEFAULT_COMMAND='fd --hidden -E .cache -E .git'
-export FZF_CTRL_T_COMMAND='fd --hidden -E .cache -E .git'
-export FZF_ALT_C_COMMAND='fd --hidden -E .cache -E .git'
+export FZF_DEFAULT_COMMAND='fdfind --hidden -E .cache -E .git'
+export FZF_CTRL_T_COMMAND='fdfind --hidden -E .cache -E .git'
+export FZF_ALT_C_COMMAND='fdfind --hidden -E .cache -E .git'
 DISABLE_FZF_AUTO_COMPLETION="false"
 DISABLE_FZF_KEY_BINDINGS="false"
 
@@ -55,18 +56,16 @@ zinit snippet "$OMZ/plugins/colored-man-pages/colored-man-pages.plugin.zsh"
 zinit snippet "$OMZ/plugins/vi-mode/vi-mode.plugin.zsh"
 zinit snippet "$OMZ/plugins/golang/golang.plugin.zsh"
 zinit snippet "$OMZ/lib/termsupport.zsh"
+zinit light denysdovhan/spaceship-prompt
+SPACESHIP_VI_MODE_SHOW=false
+SPACESHIP_PROMPT_ADD_NEWLINE=false
+
 ## zsh-autosuggestions
 bindkey '^@' autosuggest-accept
 bindkey '^_' autosuggest-clear
 
-# Powerlevel10k
-if [[ -n $DISPLAY ]]; then
-    zinit ice depth=1; zinit load romkatv/powerlevel10k
-	if [[ -r "$HOME/.cache/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-	  source "$HOME/.cache/p10k-instant-prompt-${(%):-%n}.zsh"
-	fi
-	source ~/.config/zsh/.p10k.zsh
-fi
-
 # Go
 export GOPATH="$HOME/Code/go"
+
+# TERM
+export TERM=xterm-256color
