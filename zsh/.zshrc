@@ -36,6 +36,11 @@ alias ll='LC_COLLATE=C ls -la --color=auto'
 alias zshconf='vim $HOME/.config/zsh/.zshrc'
 alias sxhkdre='pkill -USR1 -x sxhkd'
 alias vim='nvim'
+alias vimconf='vim $HOME/.config/nvim/init.vim'
+alias switchcolors='source $HOME/.local/scripts/alacritty-theme-switcher.sh'
+
+# Default color
+switchcolors dark
 
 # FZF
 export FZF_BASE=$HOME/.local/lib/fzf
@@ -48,7 +53,7 @@ DISABLE_FZF_KEY_BINDINGS="false"
 # Plugins
 source $HOME/.local/lib/zinit/zinit.zsh
 OMZ="https://github.com/ohmyzsh/ohmyzsh/blob/master"
-zinit load zsh-users/zsh-syntax-highlighting 
+zinit load zsh-users/zsh-syntax-highlighting
 zinit load zsh-users/zsh-autosuggestions
 zinit load zsh-users/zsh-completions
 zinit snippet "$OMZ/plugins/fzf/fzf.plugin.zsh"
@@ -63,6 +68,7 @@ SPACESHIP_PROMPT_ADD_NEWLINE=false
 ## zsh-autosuggestions
 bindkey '^@' autosuggest-accept
 bindkey '^_' autosuggest-clear
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
 
 # Go
 export GOPATH="$HOME/Code/go"
