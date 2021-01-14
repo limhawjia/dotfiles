@@ -1,104 +1,11 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""" Plugins """""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-nnoremap <C-f> :Rg<CR>
-nnoremap <C-p> :FZF<CR>
-
-let g:closetag_filetypes='html,javascriptreact,typescriptreact'
-let g:closetag_regions={
-            \ 'typescriptreact': 'jsxRegion,tsxRegion',
-            \ 'javascriptreact': 'jsxRegion',
-            \ }
-
-let g:polyglot_disabled=['sensible', 'autoindent']
-
-let g:indentLine_faster=1
-let g:indentLine_concealcursor='nc'
-let g:indentLine_char = '⎸'
-
-nmap cw ce
-nmap cW cE
-
-let g:pear_tree_repeatable_expand = 0
-
-let g:undotree_HighlightChangedWithSign=0
-let g:undotree_WindowLayout=4
-let g:undotree_SetFocusWhenToggle=1
-nnoremap <silent> <space>u :UndotreeToggle<CR>
-
-let g:fern#disable_default_mappings=1
-let g:fern#disable_drawer_smart_quit=1
-
-noremap <silent> <C-b> :Fern . -drawer -width=35 -toggle<CR><C-w>=
-noremap <silent> <C-n> :Fern . -drawer -reveal=% -width=35<CR><C-w>=
-
-call plug#begin()
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'joshdick/onedark.vim'
-
-Plug 'vim-airline/vim-airline'
-Plug 'neoclide/coc.nvim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
-
-Plug 'Yggdroot/indentLine'
-Plug 'nelstrom/vim-visual-star-search'
-Plug 'wellle/targets.vim'
-Plug 'tommcdo/vim-lion'
-Plug 'michaeljsmith/vim-indent-object'
-Plug 'chaoren/vim-wordmotion'
-Plug 'mbbill/undotree'
-
-Plug 'lambdalisue/fern.vim'
-Plug 'lambdalisue/fern-hijack.vim'
-Plug 'lambdalisue/fern-git-status.vim'
-
-Plug 'adelarsq/vim-matchit'
-Plug 'alvan/vim-closetag'
-Plug 'tmsvg/pear-tree'
-Plug 'ap/vim-css-color'
-
-Plug 'sheerun/vim-polyglot'
-
-Plug 'yuezk/vim-js'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'HerringtonDarkholme/yats.vim'
-call plug#end()
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""" Colors """"""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
-
-syntax on
-
-colorscheme onehalflight
-let g:airline_theme='onehalflight'
-
-if !empty($COLORMODE) && $COLORMODE == "dark"
-    colorscheme onedark
-    let g:airline_theme='onehalfdark'
-endif
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""" General """""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible
+filetype plugin indent on
+
+syntax enable
 
 set number
 set relativenumber
@@ -138,6 +45,97 @@ highlight RedundantSpaces ctermbg=red guibg=red
 match RedundantSpaces /\s\+$/
 
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""" Plugins """""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nnoremap <C-f> :Rg<CR>
+nnoremap <C-p> :FZF<CR>
+
+let g:closetag_filetypes='html,javascriptreact,typescriptreact'
+let g:closetag_regions={
+            \ 'typescriptreact': 'jsxRegion,tsxRegion',
+            \ 'javascriptreact': 'jsxRegion',
+            \ }
+
+let g:indentLine_faster=1
+let g:indentLine_concealcursor='c'
+let g:indentLine_char = '⎸'
+
+nmap cw ce
+nmap cW cE
+
+let g:undotree_HighlightChangedWithSign=0
+let g:undotree_WindowLayout=4
+let g:undotree_SetFocusWhenToggle=1
+nnoremap <silent> <space>u :UndotreeToggle<CR>
+
+let g:fern#disable_default_mappings=1
+let g:fern#disable_drawer_smart_quit=1
+let g:fern#renderer="nerdfont"
+noremap <silent> <C-b> :Fern . -drawer -width=35 -toggle<CR><C-w>=
+noremap <silent> <C-n> :Fern . -drawer -reveal=% -width=35<CR><C-w>=
+
+call plug#begin()
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'joshdick/onedark.vim'
+
+Plug 'vim-airline/vim-airline'
+Plug 'neoclide/coc.nvim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'jiangmiao/auto-pairs'
+
+
+Plug 'Yggdroot/indentLine'
+Plug 'nelstrom/vim-visual-star-search'
+Plug 'wellle/targets.vim'
+Plug 'tommcdo/vim-lion'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'chaoren/vim-wordmotion'
+Plug 'mbbill/undotree'
+
+Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/fern-hijack.vim'
+Plug 'lambdalisue/fern-git-status.vim'
+Plug 'lambdalisue/nerdfont.vim'
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+
+Plug 'adelarsq/vim-matchit'
+Plug 'alvan/vim-closetag'
+Plug 'ap/vim-css-color'
+Plug 'AndrewRadev/tagalong.vim'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+call plug#end()
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""" Colors """"""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+colorscheme onehalflight
+let g:airline_theme='onehalflight'
+
+if !empty($COLORMODE) && $COLORMODE == "dark"
+    colorscheme onedark
+    let g:airline_theme='onedark'
+endif
+
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""" Keybindings """""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -159,8 +157,6 @@ nnoremap <silent> <C-w>n :tabnext<CR>
 """""""""""""""""""""""""""""""""" Filetypes """"""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-filetype plugin indent on
-
 augroup go_format
     autocmd!
     autocmd Filetype go setlocal equalprg=gofmt
@@ -168,6 +164,8 @@ augroup end
 
 augroup cpp_format
     autocmd!
+    autocmd Filetype cpp setlocal cindent
+    autocmd Filetype cpp setlocal cinoptions=g0
     autocmd Filetype cpp setlocal shiftwidth=2
     autocmd Filetype cpp setlocal softtabstop=2
     autocmd Filetype cpp setlocal tabstop=2
@@ -229,6 +227,13 @@ augroup python_format
     autocmd Filetype python setlocal equalprg=autopep8\ -
 augroup end
 
+augroup markdown_format
+    autocmd!
+    autocmd Filetype markdown setlocal spelllang=en
+    autocmd Filetype markdown setlocal spellfile=$HOME/.local/share/nvim/spell/en.utf-8.add
+    autocmd Filetype markdown setlocal spell
+    autocmd Filetype markdown setlocal conceallevel=2
+augroup end
 
 
 
@@ -326,3 +331,18 @@ augroup FernEvents
     autocmd!
     autocmd FileType fern call FernInit()
 augroup END
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""" Treesitter """"""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true
+  },
+}
+EOF

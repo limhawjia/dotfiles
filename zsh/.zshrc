@@ -56,12 +56,13 @@ OMZ="https://github.com/ohmyzsh/ohmyzsh/blob/master"
 zinit load zsh-users/zsh-syntax-highlighting
 zinit load zsh-users/zsh-autosuggestions
 zinit load zsh-users/zsh-completions
+zinit light denysdovhan/spaceship-prompt
 zinit snippet "$OMZ/plugins/fzf/fzf.plugin.zsh"
 zinit snippet "$OMZ/plugins/colored-man-pages/colored-man-pages.plugin.zsh"
 zinit snippet "$OMZ/plugins/vi-mode/vi-mode.plugin.zsh"
 zinit snippet "$OMZ/plugins/golang/golang.plugin.zsh"
 zinit snippet "$OMZ/lib/termsupport.zsh"
-zinit light denysdovhan/spaceship-prompt
+
 SPACESHIP_VI_MODE_SHOW=false
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 
@@ -75,3 +76,7 @@ export GOPATH="$HOME/Code/go"
 
 # TERM
 export TERM=xterm-256color
+
+# Gcloud
+source /home/hawjia/.local/lib/google-cloud-sdk/completion.zsh.inc
+source /home/hawjia/.local/lib/google-cloud-sdk/path.zsh.inc
