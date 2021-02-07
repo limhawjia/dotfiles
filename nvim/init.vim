@@ -41,80 +41,69 @@ set noswapfile
 set splitright
 set splitbelow
 
-highlight RedundantSpaces ctermbg=red guibg=red
-match RedundantSpaces /\s\+$/
-
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""" Plugins """""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nnoremap <C-f> :Rg<CR>
-nnoremap <C-p> :FZF<CR>
+" plugin to show indentation
+let g:indentLine_faster=1
+let g:indentLine_concealcursor='c'
+let g:indentLine_char = '⎸'
 
+" self-explanatory
+let g:undotree_WindowLayout=4
+let g:undotree_SetFocusWhenToggle=1
+cnoreabbrev un UndotreeToggle
+
+" plugin to autoclose tags
 let g:closetag_filetypes='html,javascriptreact,typescriptreact'
 let g:closetag_regions={
             \ 'typescriptreact': 'jsxRegion,tsxRegion',
             \ 'javascriptreact': 'jsxRegion',
             \ }
 
-let g:indentLine_faster=1
-let g:indentLine_concealcursor='c'
-let g:indentLine_char = '⎸'
-
-nmap cw ce
-nmap cW cE
-
-let g:undotree_HighlightChangedWithSign=0
-let g:undotree_WindowLayout=4
-let g:undotree_SetFocusWhenToggle=1
-nnoremap <silent> <space>u :UndotreeToggle<CR>
-
-let g:fern#disable_default_mappings=1
-let g:fern#disable_drawer_smart_quit=1
-let g:fern#renderer="nerdfont"
-noremap <silent> <C-b> :Fern . -drawer -width=35 -toggle<CR><C-w>=
-noremap <silent> <C-n> :Fern . -drawer -reveal=% -width=35<CR><C-w>=
+" essential for nvim-compe
+set completeopt=menu,menuone,noselect
 
 call plug#begin()
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
+
+" nvim essentials dependencies
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+
+" nvim essentials
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/vim-vsnip'
+
+" colorscheme
 Plug 'joshdick/onedark.vim'
 
-Plug 'vim-airline/vim-airline'
-Plug 'neoclide/coc.nvim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
+" tpope essentials
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
-Plug 'jiangmiao/auto-pairs'
 
-
+" quality of life
 Plug 'Yggdroot/indentLine'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'wellle/targets.vim'
 Plug 'tommcdo/vim-lion'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'chaoren/vim-wordmotion'
 Plug 'mbbill/undotree'
-
-Plug 'lambdalisue/fern.vim'
-Plug 'lambdalisue/fern-hijack.vim'
-Plug 'lambdalisue/fern-git-status.vim'
-Plug 'lambdalisue/nerdfont.vim'
-Plug 'lambdalisue/fern-renderer-nerdfont.vim'
-
-Plug 'adelarsq/vim-matchit'
-Plug 'alvan/vim-closetag'
+Plug 'andymass/vim-matchup'
 Plug 'ap/vim-css-color'
+
+" xml/html lifesavers
+Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/tagalong.vim'
 
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
-
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""" Colors """"""""""""""""""""""""""""""""""""
@@ -126,32 +115,30 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-colorscheme onehalflight
-let g:airline_theme='onehalflight'
+colorscheme onedark
 
-if !empty($COLORMODE) && $COLORMODE == "dark"
-    colorscheme onedark
-    let g:airline_theme='onedark'
-endif
+highlight RedundantSpaces guibg=#e06c75
+match RedundantSpaces /\s\+$\|\t/
 
-
+augroup Background
+    autocmd!
+    autocmd vimenter * hi Normal  guibg=None ctermbg=None
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""" Keybindings """""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let mapleader=' '
+
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <silent> <C-_> :noh<CR>
 
-nnoremap <silent> <C-w>t :tab new<CR>
-nnoremap <silent> <C-w>p :tabprevious<CR>
-nnoremap <silent> <C-w>n :tabnext<CR>
-
-
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""" Filetypes """"""""""""""""""""""""""""""""""
@@ -235,104 +222,110 @@ augroup markdown_format
     autocmd Filetype markdown setlocal conceallevel=2
 augroup end
 
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""""" coc """""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""" builtin-lsp """""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:python_host_prog = '/usr/bin/python2'
-let g:python3_host_prog = '/usr/bin/python'
-
-set hidden
-set cmdheight=2
-set updatetime=300
-set shortmess+=c
-set signcolumn=yes
-inoremap <silent><expr> <C-j>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-h>"
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-inoremap <silent><expr> <tab> pumvisible() ? coc#_select_confirm()
-            \: "<tab>"
-
-nmap <silent> <leader>eh <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>el <Plug>(coc-diagnostic-next)
-nnoremap <silent><nowait> <leader>ea  :<C-u>CocList diagnostics<cr>
-
-nmap <silent> <leader>gd <Plug>(coc-definition)
-nmap <silent> <leader>gy <Plug>(coc-type-definition)
-nmap <silent> <leader>gi <Plug>(coc-implementation)
-nmap <silent> <leader>gr <Plug>(coc-references)
-nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    elseif (coc#rpc#ready())
-        call CocActionAsync('doHover')
-    else
-        execute '!' . &keywordprg . " " . expand('<cword>')
-    endif
-endfunction
-
-nmap <leader>rn <Plug>(coc-rename)
-
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>ca  <Plug>(coc-codeaction)
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-nnoremap <silent><nowait> <leader>?  :<C-u>CocList commands<cr>
-
-command! -nargs=0 Or :call CocAction('runCommand', 'editor.action.organizeImport')
-command! -nargs=0 Fo :call CocAction('format')
-
-hi! CocErrorSign guifg=#d1666a
-hi! CocInfoSign guibg=#353b45
-hi! CocWarningSign guifg=#d1cd66
-
-
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gh <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> el <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <silent> eh <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> ea <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <silent> ca <cmd>lua vim.lsp.buf.code_action()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""" Fern """""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""" lspconfig """"""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-function! FernInit() abort
-    nmap <buffer><expr>
-                \ <Plug>(fern-my-open-expand-collapse)
-                \ fern#smart#leaf(
-                \   "\<Plug>(fern-action-open:select)",
-                \   "\<Plug>(fern-action-expand)",
-                \   "\<Plug>(fern-action-collapse)",
-                \ )
-    nmap <buffer> <CR> <Plug>(fern-my-open-expand-collapse)
-    nmap <buffer> <2-LeftMouse> <Plug>(fern-my-open-expand-collapse)
-    nmap <buffer> m <Plug>(fern-action-mark:toggle)j
-    nmap <buffer> N <Plug>(fern-action-new-file)
-    nmap <buffer> K <Plug>(fern-action-new-dir)
-    nmap <buffer> D <Plug>(fern-action-remove)
-    nmap <buffer> M <Plug>(fern-action-move)
-    nmap <buffer> R <Plug>(fern-action-rename)
-    nmap <buffer> <C-s> <Plug>(fern-action-open:split)
-    nmap <buffer> <C-v> <Plug>(fern-action-open:vsplit)
-    nmap <buffer> r <Plug>(fern-action-reload)
-    nmap <buffer> <nowait> d <Plug>(fern-action-hidden:toggle)
-    nmap <buffer> <nowait> < <Plug>(fern-action-leave)
-    nmap <buffer> <nowait> > <Plug>(fern-action-enter)
-    let l:indentLine_enabled=0
-endfunction
+lua <<EOF
+require 'lspconfig'.bashls.setup{}
+require 'lspconfig'.clangd.setup{}
+require 'lspconfig'.cmake.setup{}
+require 'lspconfig'.cssls.setup{}
+require 'lspconfig'.dockerls.setup{}
 
-augroup FernEvents
-    autocmd!
-    autocmd FileType fern call FernInit()
-augroup END
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+require'lspconfig'.html.setup {
+  capabilities = capabilities,
+}
 
+require 'lspconfig'.pyright.setup{}
+require 'lspconfig'.sqlls.setup{}
+require 'lspconfig'.texlab.setup{}
+require 'lspconfig'.tsserver.setup{}
+require 'lspconfig'.vimls.setup{}
+require 'lspconfig'.vuels.setup{}
+EOF
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""" nvim-compe """"""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+lua <<EOF
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+
+  source = {
+    path = true;
+    buffer = true;
+    calc = true;
+    vsnip = true;
+    nvim_lsp = true;
+    nvim_lua = true;
+    spell = true;
+    tags = true;
+    snippets_nvim = true;
+    treesitter = true;
+  };
+}
+EOF
+
+inoremap <silent><expr> <C-space> compe#complete()
+inoremap <silent><expr> <Tab> compe#confirm('<Tab>')
+inoremap <silent><expr> <CR> compe#confirm('<CR>')
+
+lua <<EOF
+local t = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+_G.c_j_next = function()
+  if vim.fn.pumvisible() == 1 then
+    return t "<C-n>"
+  elseif vim.fn.call("vsnip#available", {1}) == 1 then
+    return t "<Plug>(vsnip-expand-or-jump)"
+  else
+    return t "<C-j>"
+  end
+end
+_G.c_k_prev = function()
+  if vim.fn.pumvisible() == 1 then
+    return t "<C-p>"
+  elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
+    return t "<Plug>(vsnip-jump-prev)"
+  else
+    return t "<C-k>"
+  end
+end
+
+vim.api.nvim_set_keymap("i", "<C-j>", "v:lua.c_j_next()", {expr = true})
+vim.api.nvim_set_keymap("s", "<C-j>", "v:lua.c_j_next()", {expr = true})
+vim.api.nvim_set_keymap("i", "<C-k>", "v:lua.c_k_prev()", {expr = true})
+vim.api.nvim_set_keymap("s", "<C-k>", "v:lua.c_k_prev()", {expr = true})
+EOF
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""" Treesitter """"""""""""""""""""""""""""""""""
@@ -343,6 +336,87 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
   highlight = {
     enable = true
-  },
+  }
 }
 EOF
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""" Devicons """""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+lua <<EOF
+require'nvim-web-devicons'.setup {
+    default = true;
+}
+EOF
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""" Telescope """""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+nnoremap <C-f> <cmd>Telescope live_grep<cr>
+nnoremap <C-m> <cmd>Telescope buffers<cr>
+
+lua <<EOF
+local actions = require('telescope.actions')
+require('telescope').setup {
+    defaults = {
+        mappings = {
+            i = {
+                ["<C-n>"] = false,
+                ["<C-j>"] = actions.move_selection_next,
+                ["<C-p>"] = false,
+                ["<C-k>"] = actions.move_selection_previous,
+                ["<C-x>"] = false,
+                ["<C-s>"] = actions.goto_file_selection_split
+            }
+        }
+    }
+}
+EOF
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""" Galaxyline """"""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+luafile $HOME/.config/nvim/evilline.lua
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""" nvim-tree """""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:nvim_tree_ignore=['.git']
+let g:nvim_tree_auto_open=1
+let g:nvim_tree_auto_close=1
+let g:nvim_tree_git_hl=1
+let g:nvim_tree_show_icons={
+    \ 'git': 1,
+    \ 'folders': 1,
+    \ 'files': 1
+    \ }
+let g:nvim_tree_bindings = {
+    \ 'edit':            ['<CR>', 'o'],
+    \ 'edit_vsplit':     '<C-v>',
+    \ 'edit_split':      '<C-s>',
+    \ 'edit_tab':        '<C-t>',
+    \ 'close_node':      ['<S-CR>', '<BS>'],
+    \ 'toggle_ignored':  'I',
+    \ 'toggle_dotfiles': 'H',
+    \ 'refresh':         'R',
+    \ 'preview':         '<Tab>',
+    \ 'cd':              '<C-]>',
+    \ 'create':          'a',
+    \ 'remove':          'd',
+    \ 'rename':          'r',
+    \ 'cut':             'x',
+    \ 'copy':            'c',
+    \ 'paste':           'p',
+    \ 'prev_git_item':   '[c',
+    \ 'next_git_item':   ']c',
+    \ 'dir_up':          '-',
+    \ 'close':           'q',
+    \ }
+nnoremap <C-b> :NvimTreeToggle<CR>
+nnoremap <C-n> :NvimTreeFindFile<CR>
+
