@@ -15,8 +15,6 @@ set nowrap
 set textwidth=80
 set formatoptions=tcq
 
-set scrolloff=5
-
 set ignorecase
 set smartcase
 set incsearch
