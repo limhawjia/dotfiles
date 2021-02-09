@@ -253,7 +253,6 @@ require'lspconfig'.html.setup {
 }
 
 require 'lspconfig'.pyright.setup{}
-require 'lspconfig'.sqlls.setup{}
 require 'lspconfig'.texlab.setup{}
 require 'lspconfig'.tsserver.setup{}
 require 'lspconfig'.vimls.setup{}
@@ -390,6 +389,7 @@ let g:nvim_tree_ignore=['.git']
 let g:nvim_tree_auto_open=1
 let g:nvim_tree_auto_close=1
 let g:nvim_tree_git_hl=1
+let g:nvim_tree_quit_on_open=1
 let g:nvim_tree_show_icons={
     \ 'git': 1,
     \ 'folders': 1,
