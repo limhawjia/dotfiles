@@ -101,6 +101,10 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Show all diagnostics.
 nnoremap <silent><nowait> ea  :<C-u>CocList diagnostics<cr>
 
+" Bindings to toggle parameters
+let g:coc_snippet_next="<C-j>"
+let g:coc_snippet_prev ="<C-k>"
+
 " Modify appearence of diagnostics
 hi! CocErrorSign guifg=#e06c75
 hi! CocWarningSign guifg=#e5c07b
