@@ -1,4 +1,4 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""" General """""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -75,13 +75,13 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 
 " nvim essentials
-Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'hrsh7th/nvim-compe'
-Plug 'hrsh7th/vim-vsnip'
+
+" coc
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " colorscheme
 Plug 'joshdick/onedark.vim'
@@ -225,129 +225,6 @@ augroup markdown_format
 augroup end
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""" builtin-lsp """""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gD <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> gh <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> el <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap <silent> eh <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> ea <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
-nnoremap <silent> ca <cmd>lua vim.lsp.buf.code_action()<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""" lspconfig """"""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-lua <<EOF
-require 'lspconfig'.bashls.setup{}
-require 'lspconfig'.clangd.setup{}
-require 'lspconfig'.cmake.setup{}
-require 'lspconfig'.cssls.setup{}
-require 'lspconfig'.dockerls.setup{}
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-require'lspconfig'.html.setup {
-  capabilities = capabilities,
-}
-
-require 'lspconfig'.pyright.setup{}
-require 'lspconfig'.texlab.setup{}
-require 'lspconfig'.tsserver.setup{}
-require 'lspconfig'.vimls.setup{}
-require 'lspconfig'.vuels.setup{}
-EOF
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""" nvim-compe """"""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-lua <<EOF
-require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  throttle_time = 80;
-  source_timeout = 200;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  preselect = 'enable';
-
-  source = {
-    path = true;
-    buffer = true;
-    calc = true;
-    vsnip = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    spell = true;
-    tags = true;
-    snippets_nvim = true;
-    treesitter = true;
-  };
-}
-EOF
-
-inoremap <silent><expr> <C-space> compe#complete()
-inoremap <silent><expr> <CR> compe#confirm('<CR>')
-
-lua <<EOF
-local completion = require'compe.completion'
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-    local col = vim.fn.col('.') - 1
-    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        return true
-    else
-        return false
-    end
-end
-_G.cj_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif vim.fn.call("vsnip#available", {1}) == 1 then
-    return t "<Plug>(vsnip-expand-or-jump)"
-  elseif check_back_space() then
-    return t "<C-j>"
-  else
-    return vim.fn['compe#complete']()
-  end
-end
-_G.ck_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
-  elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-    return t "<Plug>(vsnip-jump-prev)"
-  else
-    return t "<C-k>"
-  end
-end
-_G.tab_select = function()
-    if vim.fn.pumvisible() and completion._selected_item== nil then
-        return t "<C-j><Cr>"
-    else
-        return t "<Cr>"
-    end
-end
-
-vim.api.nvim_set_keymap("i", "<C-j>", "v:lua.cj_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<C-j>", "v:lua.cj_complete()", {expr = true})
-vim.api.nvim_set_keymap("i", "<C-k>", "v:lua.ck_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<C-k>", "v:lua.ck_complete()", {expr = true})
-vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_select()", {expr = true})
-vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_select()", {expr = true})
-EOF
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""" Treesitter """"""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -441,3 +318,43 @@ let g:nvim_tree_bindings = {
 nnoremap <C-b> :NvimTreeToggle<CR>
 nnoremap <C-n> :NvimTreeFindFile<CR>
 
+let g:nvim_tree_ignore=['.git']
+let g:nvim_tree_auto_open=1
+let g:nvim_tree_auto_close=1
+let g:nvim_tree_git_hl=1
+let g:nvim_tree_quit_on_open=1
+let g:nvim_tree_show_icons={
+    \ 'git': 1,
+    \ 'folders': 1,
+    \ 'files': 1
+    \ }
+let g:nvim_tree_bindings = {
+    \ 'edit':            ['<CR>', 'o'],
+    \ 'edit_vsplit':     '<C-v>',
+    \ 'edit_split':      '<C-s>',
+    \ 'edit_tab':        '<C-t>',
+    \ 'close_node':      ['<S-CR>', '<BS>'],
+    \ 'toggle_ignored':  'I',
+    \ 'toggle_dotfiles': 'H',
+    \ 'refresh':         'R',
+    \ 'preview':         '<Tab>',
+    \ 'cd':              '<C-]>',
+    \ 'create':          'a',
+    \ 'remove':          'd',
+    \ 'rename':          'r',
+    \ 'cut':             'x',
+    \ 'copy':            'c',
+    \ 'paste':           'p',
+    \ 'prev_git_item':   '[c',
+    \ 'next_git_item':   ']c',
+    \ 'dir_up':          '-',
+    \ 'close':           'q',
+    \ }
+nnoremap <C-b> :NvimTreeToggle<CR>
+nnoremap <C-n> :NvimTreeFindFile<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""" coc """"""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+source $HOME/.config/nvim/coc.vim
