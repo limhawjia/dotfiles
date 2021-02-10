@@ -28,6 +28,7 @@ export EDITOR='nvim'
 # PATH
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/Code/go/bin"
+export PATH="$PATH:/usr/local/go/bin"
 
 # Aliases
 alias ls='LC_COLLATE=C ls --color=auto'
@@ -73,3 +74,5 @@ export GOPATH="$HOME/Code/go"
 # TERM
 export TERM=xterm-256color
 
+# Start tmux on launch
+[ -z "$TMUX" ] && exec tmux new-session;
