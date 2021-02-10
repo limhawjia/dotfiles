@@ -36,8 +36,8 @@ inoremap <silent><expr> <Tab> pumvisible() ? coc#_select_confirm()
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> eh <Plug>(coc-diagnostic-prev)
-nmap <silent> el <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>eh <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>el <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -99,7 +99,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> ea  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <leader>ea  :<C-u>CocList diagnostics<cr>
 
 " Bindings to toggle parameters
 let g:coc_snippet_next="<C-j>"
