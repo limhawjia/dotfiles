@@ -142,9 +142,13 @@ nnoremap <silent> <C-_> :noh<CR>
 
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
+nnoremap <C-e> <C-e>j
+nnoremap <C-y> <C-y>k
 
 inoremap {<cr> {<cr>}<esc>O
 inoremap (<cr> (<cr>)<esc>O
+
+cnoreabbrev <silent> trim %s/\s\+$//e
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""" Filetypes """"""""""""""""""""""""""""""""""
