@@ -76,6 +76,14 @@ augroup markdown_format
     autocmd Filetype markdown setlocal conceallevel=2
 augroup end
 
+augroup text_format
+    autocmd!
+    autocmd Filetype text setlocal spelllang=en
+    autocmd Filetype text setlocal spellfile=$HOME/.local/share/nvim/spell/en.utf-8.add
+    autocmd Filetype text setlocal spell
+    autocmd Filetype text setlocal conceallevel=2
+augroup end
+
 augroup yml_format
     autocmd!
     autocmd Filetype yaml setlocal shiftwidth=2
