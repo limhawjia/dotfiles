@@ -100,6 +100,7 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'mbbill/undotree'
 Plug 'andymass/vim-matchup'
 Plug 'ap/vim-css-color'
+Plug 'junegunn/vim-peekaboo'
 
 " xml/html lifesavers
 Plug 'alvan/vim-closetag'
