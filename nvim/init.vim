@@ -107,6 +107,9 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/tagalong.vim'
 
+" formatting
+Plug 'lukas-reineke/format.nvim'
+
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

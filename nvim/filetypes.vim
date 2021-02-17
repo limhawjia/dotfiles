@@ -1,8 +1,3 @@
-augroup go_format
-    autocmd!
-    autocmd Filetype go setlocal equalprg=gofmt
-augroup end
-
 augroup cpp_format
     autocmd!
     autocmd Filetype cpp setlocal cindent
@@ -10,7 +5,6 @@ augroup cpp_format
     autocmd Filetype cpp setlocal shiftwidth=2
     autocmd Filetype cpp setlocal softtabstop=2
     autocmd Filetype cpp setlocal tabstop=2
-    autocmd Filetype cpp setlocal equalprg=clang-format
 augroup end
 
 augroup web_format
@@ -90,3 +84,48 @@ augroup yml_format
     autocmd Filetype yaml setlocal softtabstop=2
     autocmd Filetype yaml setlocal tabstop=2
 augroup end
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""" Format.nvim """"""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+lua <<EOF
+require "format".setup {
+    ["*"] = {
+        {tempfile_dir = "$HOME/.local/tmp"}
+    },
+    go = {
+        {cmd = {"gofmt -w"}}
+    },
+    javascript = {
+        {cmd = {"prettier --write"}}
+    },
+    typescript = {
+        {cmd = {"prettier --parser typescript --write"}}
+    },
+    javascriptreact = {
+        {cmd = {"prettier --write"}}
+    },
+    typescriptreact = {
+        {cmd = {"prettier --parser typescript --write"}}
+    },
+    css = {
+        {cmd = {"prettier --parser css --write"}}
+    },
+    html = {
+        {cmd = {"prettier --parser html --write"}}
+    },
+    python = {
+        {cmd = {"autopep8 --in-place"}}
+    },
+    c = {
+        {cmd = {"clang-format -i"}}
+    },
+    cpp = {
+        {cmd = {"clang-format -i"}}
+    },
+}
+EOF
+
+nnoremap <leader>fa :w<Cr> :Format<Cr>
