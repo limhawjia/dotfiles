@@ -64,6 +64,9 @@ Plug 'tpope/vim-commentary'
 
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/tagalong.vim'
+
+Plug 'Yilin-Yang/vim-markbar'
+Plug 'junegunn/vim-peekaboo'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
