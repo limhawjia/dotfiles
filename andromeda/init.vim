@@ -46,7 +46,7 @@ set splitbelow
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'arcticicestudio/nord-vim'
+Plug 'chriskempson/base16-vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
@@ -81,7 +81,7 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-colorscheme nord
+colorscheme base16-default-dark
 
 highlight RedundantSpaces guibg=#e06c75
 match RedundantSpaces /\s\+$\|\t/
@@ -144,16 +144,16 @@ set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 
 " Color groups
-hi LspDiagnosticsError guifg='#bf616a'
-hi LspDiagnosticsWarning guifg='#ebcb8b'
-hi LspDiagnosticsInformation guifg='#a3be8c'
-hi LspDiagnosticsHint guifg='#eceff4'
+hi LspDiagnosticsError guifg='#ab4642'
+hi LspDiagnosticsWarning guifg='#f7ca88'
+hi LspDiagnosticsInformation guifg='#a1b56c'
+hi LspDiagnosticsHint guifg='#585858'
 
 " Virtual text colors
-hi LspDiagnosticsVirtualTextError guifg='#bf616a'
-hi LspDiagnosticsVirtualTextWarning guifg='#ebcb8b'
-hi LspDiagnosticsVirtualTextInformation guifg='#a3be8c'
-hi LspDiagnosticsVirtualTextHint guifg='#eceff4'
+hi LspDiagnosticsVirtualTextError guifg='#ab4642'
+hi LspDiagnosticsVirtualTextWarning guifg='#f7ca88'
+hi LspDiagnosticsVirtualTextInformation guifg='#a1b56c'
+hi LspDiagnosticsVirtualTextHint guifg='#585858'
 
 " Custom signs
 sign define LspDiagnosticsSignError text= texthl=LspDiagnosticsError
@@ -162,10 +162,10 @@ sign define LspDiagnosticsSignInformation text= texthl=LspDiagnosticsInformat
 sign define LspDiagnosticsSignHint text= texthl=LspDiagnosticsHint
 
 " Underline colors
-hi LspDiagnosticsUnderlineError guifg='#bf616a'
-hi LspDiagnosticsUnderlineWarning guifg='#ebcb8b'
-hi LspDiagnosticsUnderlineInformation guifg='#a3be8c'
-hi LspDiagnosticsUnderlineHint guifg='#eceff4'
+hi LspDiagnosticsUnderlineError guifg='#ab4642'
+hi LspDiagnosticsUnderlineWarning guifg='#f7ca88'
+hi LspDiagnosticsUnderlineInformation guifg='#a1b56c'
+hi LspDiagnosticsUnderlineHint guifg='#585858'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -228,7 +228,7 @@ let g:closetag_regions={
 " lualine
 lua <<EOF
 local lualine = require('lualine')
-lualine.options.theme = 'nord'
+lualine.options.theme = 'auto'
 lualine.status()
 EOF
 
@@ -255,3 +255,14 @@ augroup web
     autocmd Filetype typescript setlocal softtabstop=2
     autocmd Filetype typescript setlocal tabstop=2
 augroup end
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""" Styling """""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+highlight clear LineNr
+highlight LineNr guifg='#383838'
+highlight clear SignColumn
+highlight SignColumn guifg='#383838'
+highlight clear CursorLineNr
+highlight CursorLineNr guifg='#383838'
+highlight clear CursorLineNr
