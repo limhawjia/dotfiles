@@ -67,6 +67,8 @@ Plug 'AndrewRadev/tagalong.vim'
 
 Plug 'Yilin-Yang/vim-markbar'
 Plug 'junegunn/vim-peekaboo'
+
+Plug 'hoob3rt/lualine.nvim'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -141,6 +143,31 @@ set completeopt=menuone,noinsert,noselect
 " Avoid showing message extra message when using completion
 set shortmess+=c
 
+" Color groups
+hi LspDiagnosticsError guifg='#bf616a'
+hi LspDiagnosticsWarning guifg='#ebcb8b'
+hi LspDiagnosticsInformation guifg='#a3be8c'
+hi LspDiagnosticsHint guifg='#eceff4'
+
+" Virtual text colors
+hi LspDiagnosticsVirtualTextError guifg='#bf616a'
+hi LspDiagnosticsVirtualTextWarning guifg='#ebcb8b'
+hi LspDiagnosticsVirtualTextInformation guifg='#a3be8c'
+hi LspDiagnosticsVirtualTextHint guifg='#eceff4'
+
+" Custom signs
+sign define LspDiagnosticsSignError text= texthl=LspDiagnosticsError
+sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsWarning
+sign define LspDiagnosticsSignInformation text= texthl=LspDiagnosticsInformation
+sign define LspDiagnosticsSignHint text= texthl=LspDiagnosticsHint
+
+" Underline colors
+hi LspDiagnosticsUnderlineError guifg='#bf616a'
+hi LspDiagnosticsUnderlineWarning guifg='#ebcb8b'
+hi LspDiagnosticsUnderlineInformation guifg='#a3be8c'
+hi LspDiagnosticsUnderlineHint guifg='#eceff4'
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""" Treesitter """"""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -197,6 +224,14 @@ let g:closetag_regions={
             \ 'typescriptreact': 'jsxRegion,tsxRegion',
             \ 'javascriptreact': 'jsxRegion',
             \ }
+
+" lualine
+lua <<EOF
+local lualine = require('lualine')
+lualine.options.theme = 'nord'
+lualine.status()
+EOF
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""" Filetype options """""""""""""""""""""""""""""""
