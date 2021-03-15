@@ -144,6 +144,7 @@ set shortmess+=c
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
   highlight = {
     enable = true,
   },
@@ -177,6 +178,10 @@ require('telescope').setup{
     mappings = {
       i = {
         ["<c-[>"] = actions.close,
+        ["<c-k>"] = actions.move_selection_previous,
+        ["<c-j>"] = actions.move_selection_next,
+        ["<c-u>"] = actions.preview_scrolling_up,
+        ["<c-d>"] = actions.preview_scrolling_down,
       }
     },
   }
