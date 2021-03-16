@@ -229,6 +229,8 @@ let g:closetag_regions={
 lua <<EOF
 local lualine = require('lualine')
 lualine.options.theme = 'auto'
+lualine.options.section_separators = {'', ''}
+lualine.options.component_separators = {'', ''}
 lualine.status()
 EOF
 
@@ -259,6 +261,7 @@ augroup end
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""" Styling """""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 highlight clear LineNr
 highlight LineNr guifg='#383838'
 highlight clear SignColumn
