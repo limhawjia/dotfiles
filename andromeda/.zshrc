@@ -91,6 +91,7 @@ zinit light-mode for \
 
 zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
 zinit light sindresorhus/pure
+PURE_PROMPT_SYMBOL=➜
 
 OMZ="https://github.com/ohmyzsh/ohmyzsh/blob/master"
 zinit load zsh-users/zsh-completions
@@ -101,5 +102,7 @@ zinit snippet "$OMZ/lib/termsupport.zsh"
 ###############################################################################
 ################################ Others #######################################
 ###############################################################################
+
+# FZF keybindings
 source /usr/share/doc/fzf/examples/key-bindings.zsh
 bindkey '^F' fzf-file-widget
